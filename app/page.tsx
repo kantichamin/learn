@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { prisma } from "@/lib/db";
 
-interface Profile {
+interface ProfileData {
   fullname: string;
   nickname: string;
   history: string[];
@@ -13,7 +14,7 @@ interface Profile {
   image: string;
 }
 
-const profile: Profile = {
+const fallbackProfile: ProfileData = {
   fullname: "กันติชา ไชยชนะ",
   nickname: "ซีแกรม",
   history: [
@@ -30,7 +31,21 @@ const profile: Profile = {
   image: "/profile.jpg",
 };
 
-export default function Home() {
+async function getProfile(): Promise<ProfileData> {
+  try {
+    const dbProfile = await prisma.profile.findFirst();
+    if (dbProfile) return dbProfile;
+  } catch {
+    // DB not available — use fallback
+  }
+  return fallbackProfile;
+}
+
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const profile = await getProfile();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-slate-50 to-rose-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
