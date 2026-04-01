@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Kanit } from "next/font/google";
+import Navbar from "./components/navbar";
 import "./globals.css";
 
 const kanit = Kanit({
@@ -10,14 +11,17 @@ const kanit = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: "กันติชา ไชยชนะ | โปรไฟล์",
+  title: {
+    default: "LearnDev — คู่มือสายอาชีพ Software Development",
+    template: "%s | LearnDev",
+  },
   description:
-    "เว็บไซต์โปรไฟล์ส่วนตัวของกันติชา ไชยชนะ (ซีแกรม) นักศึกษาคณะวิศวกรรมศาสตร์ สาขาคอมพิวเตอร์ มหาวิทยาลัยเชียงใหม่",
+    "แหล่งเรียนรู้สายอาชีพ Software Development สำหรับนักศึกษา — PO, PM, BA, SA, Dev, DevOps, Designer, Data Engineer, AI Engineer",
   openGraph: {
-    title: "กันติชา ไชยชนะ | โปรไฟล์",
+    title: "LearnDev — คู่มือสายอาชีพ Software Development",
     description:
-      "เว็บไซต์โปรไฟล์ส่วนตัวของกันติชา ไชยชนะ (ซีแกรม) นักศึกษาคณะวิศวกรรมศาสตร์ สาขาคอมพิวเตอร์ มหาวิทยาลัยเชียงใหม่",
-    type: "profile",
+      "แหล่งเรียนรู้สายอาชีพ Software Development สำหรับนักศึกษา",
+    type: "website",
   },
 };
 
@@ -28,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="th" suppressHydrationWarning>
-      <body className={`${kanit.variable} antialiased`} suppressHydrationWarning>{children}</body>
+      <body className={`${kanit.variable} antialiased`} suppressHydrationWarning>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
