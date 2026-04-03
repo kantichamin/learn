@@ -9,6 +9,8 @@ const links = [
   { href: "/learn", label: "เรียนรู้" },
   { href: "/languages", label: "ภาษา" },
   { href: "/tools", label: "เครื่องมือ" },
+  { href: "/techstacks", label: "Tech Stack" },
+  { href: "/cloud", label: "Cloud" },
   { href: "/glossary", label: "คำศัพท์" },
   { href: "/careers", label: "สายอาชีพ" },
   { href: "/salaries", label: "เงินเดือน" },
